@@ -14,7 +14,7 @@ describe('Parameters', () => {
   describe('Factory Functions', () => {
     it('should create a number parameter correctly', () => {
       const param = createNumberParameter('test_id', 'Test Number', { min: 0, max: 10 }, 5);
-      
+
       expect(param.id).toBe('test_id');
       expect(param.name).toBe('Test Number');
       expect(param.type).toBe('number');
@@ -24,7 +24,7 @@ describe('Parameters', () => {
 
     it('should create a number parameter without default value', () => {
       const param = createNumberParameter('test_id', 'Test Number', { min: 0, max: 10 });
-      
+
       expect(param.id).toBe('test_id');
       expect(param.name).toBe('Test Number');
       expect(param.type).toBe('number');
@@ -33,8 +33,13 @@ describe('Parameters', () => {
     });
 
     it('should create a bigint parameter correctly', () => {
-      const param = createBigIntParameter('test_id', 'Test BigInt', { min: 0, max: 100 }, BigInt(50));
-      
+      const param = createBigIntParameter(
+        'test_id',
+        'Test BigInt',
+        { min: 0, max: 100 },
+        BigInt(50)
+      );
+
       expect(param.id).toBe('test_id');
       expect(param.name).toBe('Test BigInt');
       expect(param.type).toBe('bigint');
@@ -44,8 +49,13 @@ describe('Parameters', () => {
     });
 
     it('should create a string parameter correctly', () => {
-      const param = createStringParameter('test_id', 'Test String', { minLength: 1, maxLength: 10 }, 'default');
-      
+      const param = createStringParameter(
+        'test_id',
+        'Test String',
+        { minLength: 1, maxLength: 10 },
+        'default'
+      );
+
       expect(param.id).toBe('test_id');
       expect(param.name).toBe('Test String');
       expect(param.type).toBe('string');
@@ -56,7 +66,7 @@ describe('Parameters', () => {
 
     it('should create a select parameter correctly', () => {
       const param = createSelectParameter('test_id', 'Test Select', ['a', 'b', 'c'], 'b');
-      
+
       expect(param.id).toBe('test_id');
       expect(param.name).toBe('Test Select');
       expect(param.type).toBe('select');
@@ -67,7 +77,7 @@ describe('Parameters', () => {
 
     it('should create a color parameter correctly', () => {
       const param = createColorParameter('test_id', 'Test Color', '#ff0000');
-      
+
       expect(param.id).toBe('test_id');
       expect(param.name).toBe('Test Color');
       expect(param.type).toBe('color');
@@ -77,7 +87,7 @@ describe('Parameters', () => {
 
     it('should create a boolean parameter correctly', () => {
       const param = createBooleanParameter('test_id', 'Test Boolean', true);
-      
+
       expect(param.id).toBe('test_id');
       expect(param.name).toBe('Test Boolean');
       expect(param.type).toBe('boolean');
@@ -85,4 +95,4 @@ describe('Parameters', () => {
       expect(param.default).toBe(true);
     });
   });
-}); 
+});

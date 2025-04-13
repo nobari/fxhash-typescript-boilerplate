@@ -15,7 +15,7 @@ import {
   createSelectParameter,
   createColorParameter,
   createBooleanParameter,
-  FxHashParameter
+  FxHashParameter,
 } from './models/Parameters';
 
 /**
@@ -23,53 +23,27 @@ import {
  */
 const defineParameters = (): void => {
   const params: FxHashParameter[] = [
-    createNumberParameter(
-      "number_id",
-      "A number/float64",
-      {
-        min: 1,
-        max: 10,
-        step: 0.0001,
-      }
-    ),
-    createBigIntParameter(
-      "bigint_id",
-      "A bigint",
-      {
-        min: Number.MIN_SAFE_INTEGER * 4,
-        max: Number.MAX_SAFE_INTEGER * 4,
-        step: 1,
-      }
-    ),
-    createStringParameter(
-      "string_id_long",
-      "A string long",
-      {
-        minLength: 1,
-        maxLength: 512,
-      }
-    ),
-    createSelectParameter(
-      "select_id",
-      "A selection",
-      ["apple", "orange", "pear"]
-    ),
-    createColorParameter(
-      "color_id",
-      "A color"
-    ),
-    createBooleanParameter(
-      "boolean_id",
-      "A boolean"
-    ),
-    createStringParameter(
-      "string_id",
-      "A string",
-      {
-        minLength: 1,
-        maxLength: 512,
-      }
-    ),
+    createNumberParameter('number_id', 'A number/float64', {
+      min: 1,
+      max: 10,
+      step: 0.0001,
+    }),
+    createBigIntParameter('bigint_id', 'A bigint', {
+      min: Number.MIN_SAFE_INTEGER * 4,
+      max: Number.MAX_SAFE_INTEGER * 4,
+      step: 1,
+    }),
+    createStringParameter('string_id_long', 'A string long', {
+      minLength: 1,
+      maxLength: 512,
+    }),
+    createSelectParameter('select_id', 'A selection', ['apple', 'orange', 'pear']),
+    createColorParameter('color_id', 'A color'),
+    createBooleanParameter('boolean_id', 'A boolean'),
+    createStringParameter('string_id', 'A string', {
+      minLength: 1,
+      maxLength: 512,
+    }),
   ];
 
   paramService.defineParams(params);
@@ -80,10 +54,10 @@ const defineParameters = (): void => {
  */
 const defineFeatures = (): void => {
   paramService.defineFeatures({
-    "A random feature": Math.floor($fx.rand() * 10),
-    "A random boolean": $fx.rand() > 0.5,
-    "A random string": ["A", "B", "C", "D"].at(Math.floor($fx.rand() * 4)),
-    "Feature from params, its a number": $fx.getParam<number>("number_id"),
+    'A random feature': Math.floor($fx.rand() * 10),
+    'A random boolean': $fx.rand() > 0.5,
+    'A random string': ['A', 'B', 'C', 'D'].at(Math.floor($fx.rand() * 4)),
+    'Feature from params, its a number': $fx.getParam<number>('number_id'),
   });
 };
 
@@ -91,8 +65,8 @@ const defineFeatures = (): void => {
  * Update the document based on the parameters
  */
 const updateDocument = (): void => {
-  const bgcolor = $fx.getParam<{ hex: { rgba: string } }>("color_id").hex.rgba;
-  const textcolor = colorService.getContrastTextColor(bgcolor.replace("#", ""));
+  const bgcolor = $fx.getParam<{ hex: { rgba: string } }>('color_id').hex.rgba;
+  const textcolor = colorService.getContrastTextColor(bgcolor.replace('#', ''));
 
   // Update the document based on the parameters
   document.body.style.background = bgcolor;
@@ -123,9 +97,9 @@ const updateDocument = (): void => {
   `;
 
   // Create button to emit random params
-  const btn = document.createElement("button");
-  btn.textContent = "emit random params";
-  btn.addEventListener("click", handleRandomizeClick);
+  const btn = document.createElement('button');
+  btn.textContent = 'emit random params';
+  btn.addEventListener('click', handleRandomizeClick);
   document.body.appendChild(btn);
 };
 
@@ -133,7 +107,7 @@ const updateDocument = (): void => {
  * Handle click on the randomize button
  */
 const handleRandomizeClick = (): void => {
-  $fx.emit("params:update", paramService.getRandomParams());
+  $fx.emit('params:update', paramService.getRandomParams());
   main();
 };
 
@@ -154,14 +128,14 @@ const initialize = (): void => {
 
   // Set up event listeners
   $fx.on(
-    "params:update",
+    'params:update',
     (newRawValues: { number_id?: number }): boolean => {
       // opt-out default behaviour
       if (newRawValues.number_id === 5) return false;
       // opt-in default behaviour
       return true;
     },
-    (optInDefault: boolean, newValues: Record<string, any>): void => main()
+    (_optInDefault: boolean, _newValues: Record<string, unknown>): void => main()
   );
 };
 
@@ -170,4 +144,4 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initialize);
 } else {
   initialize();
-} 
+}

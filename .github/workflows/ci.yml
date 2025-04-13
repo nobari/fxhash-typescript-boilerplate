@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x, 18.x, 20.x]
+        node-version: [20.x, 22.x]
 
     steps:
     - uses: actions/checkout@v3
@@ -54,12 +54,25 @@ jobs:
     - name: Install dependencies
       run: npm ci
       
+    - name: Install fxhash CLI globally
+      run: npm install -g fxhash
+      
     - name: Build fxhash artifact
       run: npm run fxbuild:minify
       
+    - name: Verify artifact exists
+      run: ls -la upload.zip
+      
+    - name: Extract upload.zip contents
+      run: |
+        mkdir -p artifact-contents
+        unzip -o upload.zip -d artifact-contents
+        ls -la artifact-contents
+      
     - name: Upload artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: fxhash-artifact
-        path: upload.zip
-        retention-days: 7 
+        path: ./artifact-contents
+        retention-days: 7
+        if-no-files-found: error 

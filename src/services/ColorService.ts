@@ -27,12 +27,10 @@ export class ColorService implements IColorService {
    */
   public getContrastTextColor(backgroundColor: string): string {
     // Parse the red component and check if it's bright enough for black text
-    return ((parseInt(backgroundColor, 16) >> 16) & 0xff) > 0xaa
-      ? "#000000"
-      : "#ffffff";
+    return ((parseInt(backgroundColor, 16) >> 16) & 0xff) > 0xaa ? '#000000' : '#ffffff';
   }
 }
 
 // Singleton instance for convenient usage
 const colorService = new ColorService();
-export default colorService; 
+export default colorService;

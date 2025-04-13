@@ -14,13 +14,13 @@ export interface IParamService {
    * @param params - Array of parameter definitions
    */
   defineParams(params: FxHashParameter[]): void;
-  
+
   /**
    * Defines features for the fxhash project
    * @param features - Record of feature definitions
    */
-  defineFeatures(features: Record<string, any>): void;
-  
+  defineFeatures(features: Record<string, unknown>): void;
+
   /**
    * Gets random values for all parameters
    * @returns Object containing random values for each parameter
@@ -34,7 +34,7 @@ export interface IParamService {
  */
 export class ParamService implements IParamService {
   private readonly params: FxHashParameter[] = [];
-  
+
   /**
    * Defines parameters for the fxhash project
    * @param params - Array of parameter definitions
@@ -44,30 +44,30 @@ export class ParamService implements IParamService {
     this.params.push(...params); // Add new params
     window.$fx.params(params);
   }
-  
+
   /**
    * Defines features for the fxhash project
    * @param features - Record of feature definitions
    */
-  public defineFeatures(features: Record<string, any>): void {
+  public defineFeatures(features: Record<string, unknown>): void {
     window.$fx.features(features);
   }
-  
+
   /**
    * Gets random values for all parameters
    * @returns Object containing random values for each parameter
    */
   public getRandomParams(): Record<string, unknown> {
     const randomParams: Record<string, unknown> = {};
-    
+
     for (const param of this.params) {
       randomParams[param.id] = window.$fx.getRandomParam<unknown>(param.id);
     }
-    
+
     return randomParams;
   }
 }
 
 // Singleton instance for convenient usage
 const paramService = new ParamService();
-export default paramService; 
+export default paramService;

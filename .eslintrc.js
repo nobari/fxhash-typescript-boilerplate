@@ -65,5 +65,11 @@ module.exports = {
         '@typescript-eslint/no-non-null-assertion': 'off',
       },
     },
+    {
+      files: ['**/*.d.ts'],
+      rules: {
+        '@typescript-eslint/no-explicit-any': 'off',
+      },
+    },
   ],
 }; 

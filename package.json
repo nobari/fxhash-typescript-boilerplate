@@ -12,7 +12,7 @@
     "lint:fix": "eslint . --ext .ts --fix",
     "format": "prettier --write \"src/**/*.ts\"",
     "format:check": "prettier --check \"src/**/*.ts\"",
-    "fxbuild:prepare": "mkdir -p temp-build && cp -r dist/{index.js,index.html,fxhash.min.js,styles.css,services,models} temp-build/ && find temp-build -name \"*.d.ts\" -delete && find temp-build -name \"*.map\" -delete",
+    "fxbuild:prepare": "mkdir -p temp-build && cp dist/index.js temp-build/ && cp dist/index.html temp-build/ && cp dist/fxhash.min.js temp-build/ && cp dist/styles.css temp-build/ && cp -r dist/services temp-build/ && cp -r dist/models temp-build/ && find temp-build -name \"*.d.ts\" -delete && find temp-build -name \"*.map\" -delete",
     "fxbuild": "npm run build && npm run fxbuild:prepare && cd temp-build && fxhash build && mv upload.zip .. && cd .. && rimraf temp-build",
     "fxbuild:minify": "npm run build && npm run fxbuild:prepare && cd temp-build && fxhash build --minify && mv upload.zip .. && cd .. && rimraf temp-build",
     "test": "jest",

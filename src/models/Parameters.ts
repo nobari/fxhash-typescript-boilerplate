@@ -11,7 +11,7 @@ export interface IParameter {
   name: string;
   type: string;
   update?: 'code-driven';
-  options?: Record<string, any>;
+  options?: Record<string, unknown>;
 }
 
 /**
@@ -82,12 +82,12 @@ export interface IBooleanParameter extends IParameter {
 /**
  * Union type of all parameter types
  */
-export type FxHashParameter = 
-  | INumberParameter 
-  | IBigIntParameter 
-  | IStringParameter 
-  | ISelectParameter 
-  | IColorParameter 
+export type FxHashParameter =
+  | INumberParameter
+  | IBigIntParameter
+  | IStringParameter
+  | ISelectParameter
+  | IColorParameter
   | IBooleanParameter;
 
 /**
@@ -170,4 +170,4 @@ export const createBooleanParameter = (
   type: 'boolean',
   update: 'code-driven',
   ...(defaultValue !== undefined && { default: defaultValue }),
-}); 
+});
