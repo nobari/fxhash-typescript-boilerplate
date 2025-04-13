@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# TypeScript source and config
+tsconfig.json
+src/
+*.ts
+*.d.ts
+*.map
+
+# Development files
+.vscode/
+.idea/
+.git/
+.github/
+.gitignore
+jest.config.js
+*.test.js
+*.spec.js
+__tests__/
+
+# Build artifacts (except the ones we need)
+dist/services/
+dist/models/
+dist/types/
+
+# Misc
+README.md
+LICENSE
+.DS_Store 
