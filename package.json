@@ -5,7 +5,9 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "dev": "fxhash dev",
+    "dev": "cd dist && fxhash dev",
+    "watch": "tsc --watch",
+    "hot-reload": "concurrently \"npm run watch\" \"sleep 2 && npm run dev\"",
     "prebuild": "rimraf dist",
     "postbuild": "copyfiles -u 1 src/index.html src/fxhash.min.js src/styles.css dist/",
     "lint": "eslint . --ext .ts",
@@ -47,6 +49,7 @@
     "@types/node": "^20.5.0",
     "@typescript-eslint/eslint-plugin": "^6.4.0",
     "@typescript-eslint/parser": "^6.4.0",
+    "concurrently": "^9.1.2",
     "copyfiles": "^2.4.1",
     "eslint": "^8.47.0",
     "husky": "^8.0.3",
